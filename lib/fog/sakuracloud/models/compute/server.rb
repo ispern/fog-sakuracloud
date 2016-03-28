@@ -28,6 +28,15 @@ module Fog
           service.stop_server(id, force)
         end
 
+        def reboot(force = false)
+          requires :id
+          stop(force)
+          wait_for { failed? }
+
+          boot
+          wait_for { ready? }
+        end
+
         def delete(force = false, disks = [])
           requires :id
           service.delete_server(id, force, disks)
