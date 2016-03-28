@@ -18,6 +18,7 @@ module Fog
 
       request_path 'fog/sakuracloud/requests/compute'
       request      :list_servers
+      request      :get_server
       request      :create_server
       request      :delete_server
       request      :boot_server
