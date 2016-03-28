@@ -47,6 +47,27 @@ module Fog
         def failed?
           state == 'down'
         end
+
+        def public_ip_address
+          requires :id
+          service.get_server(id).body['Server']['Interfaces'].first['IPAddress']
+        end
+
+        def private_ip_address
+          ip = nil
+          self.interfaces.each { |interface|
+            if interface['Switch']['Scope'] != 'shared'
+              ip = interface['IPAddress']
+              break
+            end
+          }
+          ip
+        end
+
+        def addresses
+          {:address => [public_ip_address]}
+        end
+
       end
     end
   end
