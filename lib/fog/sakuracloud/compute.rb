@@ -22,6 +22,7 @@ module Fog
       request      :delete_server
       request      :boot_server
       request      :stop_server
+      request      :state_server
       request      :list_plans
       request      :list_ssh_keys
       request      :list_zones

@@ -34,6 +34,19 @@ module Fog
           true
         end
         alias_method :destroy, :delete
+
+        def state
+          requires :id
+          service.state_server(id).body["Instance"]["Status"]
+        end
+
+        def ready?
+          state == 'up'
+        end
+
+        def failed?
+          state == 'down'
+        end
       end
     end
   end
