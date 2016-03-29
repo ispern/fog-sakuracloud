@@ -12,6 +12,10 @@ module Fog
                 "ID" => sw_id
               }
             end
+
+            if options[:switch_shared]
+              connectedswitches.unshift({"Scope"=>"shared", "BandWidthMbps"=>100})
+            end
           else
             connectedswitches = [{"Scope"=>"shared", "BandWidthMbps"=>100}]
           end
